@@ -25,5 +25,5 @@ button:hover {
 }
 
 image {
-    -gtk-icon-transform: scale(0.5, 0.5);
+    -gtk-icon-transform: scale(0.35, 0.35);
 }

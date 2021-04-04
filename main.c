@@ -46,7 +46,8 @@ int main(int argc, char **argv)
 
     vk_image = GTK_WIDGET(gtk_builder_get_object(builder, "vk_image"));
 
-    gtk_image_set_pixel_size(GTK_IMAGE(vk_image), 128);
+    gtk_image_set_from_file(GTK_IMAGE(vk_image), "styles/vk.png");
+
 
     g_object_unref(builder);
 
