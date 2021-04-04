@@ -70,7 +70,7 @@ int main(int argc, char **argv)
     vertical_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
     // Packing username objects in box
-    gtk_box_pack_start(GTK_BOX(horizontal_box_username), username_label, TRUE, TRUE, 5);
+    gtk_box_pack_start(GTK_BOX(horizontal_box_username), username_label, FALSE, TRUE, 5);
     gtk_box_pack_start(GTK_BOX(horizontal_box_username), username_entry, TRUE, FALSE, 5);
 
     // Packing password objects in box

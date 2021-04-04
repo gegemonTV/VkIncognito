@@ -2,6 +2,21 @@ window {
     background-color: white;
 }
 
-window label{
+entry {
+margin-left: 8px;
+margin-right: 8px;
+}
+label{
     color: black;
 }
+
+button{
+    background: DodgerBlue;
+    color: white;
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+button:hover { background: Cyan; border-color: #8bb; }
