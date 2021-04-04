@@ -19,4 +19,11 @@ button{
     border-width: 3px;
 }
 
-button:hover { background: Cyan; border-color: #8bb; }
+button:hover {
+    background: Cyan;
+    border-color: #8bb;
+}
+
+image {
+    -gtk-icon-transform: scale(0.5, 0.5);
+}

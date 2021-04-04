@@ -36,10 +36,17 @@ int main(int argc, char **argv)
     GtkWidget  *window;
     GtkBuilder *builder;
 
+    GtkWidget  *vk_image;
+
     builder = gtk_builder_new();
     gtk_builder_add_from_file(GTK_BUILDER(builder), login_builder, NULL);
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "login_window"));
+    gtk_window_set_icon_from_file(GTK_WINDOW(window), "styles/vk.png", 0);
+
+    vk_image = GTK_WIDGET(gtk_builder_get_object(builder, "vk_image"));
+
+    gtk_image_set_pixel_size(GTK_IMAGE(vk_image), 128);
 
     g_object_unref(builder);
 
@@ -53,6 +60,3 @@ int main(int argc, char **argv)
 }
 
 
-void quit(){
-    gtk_main_quit();
-}
