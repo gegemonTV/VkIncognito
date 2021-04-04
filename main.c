@@ -1,30 +1,30 @@
-#include <stdlib.h>
-#include "headers/log_in.h"
+#include <gtk-3.0/gtk/gtk.h>
 
-gchar *login_style = "log_in.css";
+gchar *login_style = "styles/log_in.css";
 
-gchar *get_file( const gchar * filename)
+const gchar *log_in_label_ru = "Вход";
+const gchar *email_phone_label_ru = "Эл. почта или телефон:";
+const gchar *password_label_ru = "Пароль: ";
+const gchar *email_phone_placeholder_ru = "Введите эл. почту или телефон...";
+const gchar *password_placeholder_ru = "Введите пароль...";
+
+
+void refresh_css(gchar *stylefile)
 {
-    string temp = "";
-    string read_file = "";
-    gchar * ret;
+    GtkCssProvider *provider;
+    GdkScreen *screen;
+    GdkDisplay *display;
 
-    fstream my_file(filename);
-    while( getline(my_file, temp) )
-    {
-        read_file += temp;
-        read_file += '\n';
-    }
-    ret = (gchar*)malloc(sizeof(gchar)*(read_file.length()+1));
-    strcpy(ret, read_file.c_str());
-    return ret;
-}
+    /* Apply CSS */
+    provider = gtk_css_provider_new ();
+    display = gdk_display_get_default ();
+    screen = gdk_display_get_default_screen (display);
+    gtk_style_context_add_provider_for_screen (screen, GTK_STYLE_PROVIDER (provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-void write_file( const gchar * filename, gchar * text )
-{
-    ofstream my_file(filename);
-    my_file << text;
-    my_file.close();
+    GError *error = 0;
+    gtk_css_provider_load_from_file(provider, g_file_new_for_path(stylefile), &error);
+    g_object_unref(provider);
+    /**/
 }
 
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
     // Labels Initialization
     username_label = gtk_label_new(email_phone_label_ru);
-    passwd_label = gtk_label_new(passwd_label);
+    passwd_label = gtk_label_new(password_label_ru);
 
     gtk_label_set_width_chars(GTK_LABEL(username_label), 16);
     gtk_label_set_width_chars(GTK_LABEL(passwd_label), 16);
@@ -61,8 +61,8 @@ int main(int argc, char **argv)
     gtk_entry_set_placeholder_text(GTK_ENTRY(passwd_entry), password_placeholder_ru);
 
     // Buttons Initialization
-    log_in_button = gtk_button_new();
-    gtk_button_set_label(GTK_BUTTON(log_in_button), log_in_label_ru);
+    log_in_button = gtk_button_new_with_label(log_in_label_ru);
+    //gtk_button_set_label(GTK_BUTTON(log_in_button), log_in_label_ru);
 
     // Boxes Initialization
     horizontal_box_username = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 12);
@@ -86,6 +86,7 @@ int main(int argc, char **argv)
 
     //Adding vertical box to container
     gtk_container_add(GTK_CONTAINER(window), vertical_box);
+    refresh_css(login_style);
 
     gtk_widget_show_all(window);
 
